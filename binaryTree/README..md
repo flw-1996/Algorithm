@@ -75,3 +75,31 @@ void traverse(TreeNode* root) {
 2、是否可以定义一个递归函数，通过子问题（子树）的答案推导出原问题的答案？如果可以，写出这个递归函数的定义，并充分利用这个函数的返回值。
 
 3、无论使用哪一种思维模式，你都要明白二叉树的每一个节点需要做什么，需要在什么时候（前中后序）做。
+
+
+DFS：深度优先遍历, 也是前序遍历
+BFS：广度优先遍历, 也是层序遍历，属于迭代遍历
+void levelTraverse(TreeNode *root) {
+    if (root ==nullptr) return;
+    queue<TreeNode*> q;
+    q.push(root);
+    <!-- // 从上到下遍历二叉树的每一层 -->
+    while(!q.empty()) {
+        int size = q.size();
+        <!-- // 从左到右遍历每一层的每个节点 -->
+        for(int i = 0; i < size; i++) {
+            TreeNode *node = q.front();
+            q.pop();
+            cout << node->val << " ";
+            if(node->left != nullptr) q.push(node->left);
+            if(node->right != nullptr) q.push(node->right);
+        }
+    cout << endl;
+    }
+}
+<!-- 动归/DFS/回溯算法都可以看做二叉树问题的扩展，只是它们的关注点不同： -->
+
+<!-- 动态规划算法属于分解问题的思路，它的关注点在整棵「子树」。
+     回溯算法属于遍历的思路，它的关注点在节点间的「树枝」。
+     DFS 算法属于遍历的思路，它的关注点在单个「节点」。
+-->
