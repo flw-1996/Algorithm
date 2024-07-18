@@ -32,7 +32,7 @@ public:
         return memo[amount] = res == INT_MAX ? -1 : res;
     }
 
-//自底向上
+//自底向上 递推法
     int coinChange2(vector<int>& coins, int amount) {
     vector<int> dp(amount + 1, amount + 1);
     // 数组大小为 amount + 1，初始值也为 amount + 1
