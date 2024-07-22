@@ -42,6 +42,11 @@ int main() {
     Solution sol;
     vector<int> nums = {1, 2, 3};
     vector<vector<int>> res = sol.permute(nums);
-    cout << res.size() << endl;
+    for (auto& v : res) {
+        for (auto&e : v) {
+            cout << e << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
