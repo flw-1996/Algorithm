@@ -1,5 +1,5 @@
 <!-- 回溯算法解题套路框架 -->
-### 回溯算法是在遍历「树枝」，DFS 算法是在遍历「节点」
+# 回溯算法是在遍历「树枝」，DFS 算法是在遍历「节点」
 ## 抽象地说，解决一个回溯问题，实际上就是遍历一棵决策树的过程，树的每个叶子节点存放着一个合法答案。你把整棵树遍历一遍，把叶子节点上的答案都收集起来，就能得到所有的合法答案。
 站在回溯树的一个节点上，你只需要思考 3 个问题：
 
@@ -47,11 +47,11 @@
                                3 |       | 2   3|       |1    2|       |1
                                  |       |      |       |      |       |
                                  O       O      O       O      O       O
-# 回溯算法解题步骤
+### 回溯算法解题步骤
 1、定义路径，定义选择列表，定义结束条件
 2、编写回溯函数，在函数中编写选择列表，选择列表中做选择，递归调用回溯函数，撤销选择
 
-## 回溯算法解题套路框架
+### 回溯算法解题套路框架
 ```python
 result = []
 def backtrack(路径, 选择列表):
@@ -68,10 +68,11 @@ def backtrack(路径, 选择列表):
 # 总结
 ### 回溯算法就是个多叉树的遍历问题，关键是在前序和后序遍历的位置做一些操作.
 
-# 子集（元素无重不可复选）
+## 子集（元素无重不可复选）
 ![alt text](image.png)
 ### 注意这棵树的特性：
 ### 如果把根节点作为第 0 层，将每个节点和根节点之间树枝上的元素作为该节点的值，那么第 n 层的所有节点就是大小为 n 的所有子集。
+
 class Solution {
 public:
   vector<vector<int>> subsets(vector<int>& nums) {
@@ -94,7 +95,8 @@ private:
   vector<int> track;
 };
 
-# 组合（元素无重不可复选）
+## 组合（元素无重不可复选）
+
 class Solution {
 public:
     vector<vector<int>> res;
@@ -127,11 +129,12 @@ public:
     }
 };
 
-# 排列 （元素无重不可复选）
+## 排列 （元素无重不可复选）
 排列问题本身就是让你穷举元素的位置,需要额外使用 used 数组来标记哪些元素还可以被选择
 ![alt text](image-1.png)参考全排列permute.cc
 
-# 子集/组合（元素可重不可复选）///子集 II
+## 子集/组合（元素可重不可复选）///子集 II
+
 class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
@@ -158,7 +161,8 @@ private:
     vector<int> sets;
 };
 
-# 组合总和 II（元素可重不可复选）
+## 组合总和 II（元素可重不可复选）
+
 class Solution {
 public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
@@ -190,8 +194,9 @@ private:
     int sum = 0;
 };
 
-# 排列（元素可重不可复选） 全排列II
-## 标准的全排列算法利用 used 数组进行剪枝,避免重复使用同一个元素
+## 排列（元素可重不可复选） 全排列II
+### 标准的全排列算法利用 used 数组进行剪枝,避免重复使用同一个元素
+
 class Solution {
 public:
     vector<vector<int>> res;
@@ -225,7 +230,8 @@ public:
     }
 };
 
-# 子集/组合（元素无重可复选）
+## 子集/组合（元素无重可复选）
+
 class Solution {
 public:
     vector<vector<int>> res;
@@ -257,15 +263,17 @@ public:
     }
 };
 
-# 排列（元素无重可复选）
-## 既然元素可以重复， 对于：全排列： 去掉：used：标记即可
+## 排列（元素无重可复选）
+### 既然元素可以重复， 对于：全排列： 去掉：used：标记即可
 
 
 
 # 总结
 
 ## 元素无重不可复选，即 nums 中的元素唯一，每个元素最多被使用一次，backtrack 核心代码如下：
+
 /* 组合/子集问题回溯算法框架 */
+
 void backtrack(vector<int>& nums, int start) {
     for (int i = start; i < nums.size(); i++>) {
         track.push_back(nums[i]);
@@ -273,7 +281,9 @@ void backtrack(vector<int>& nums, int start) {
         track.pop_back();
     }
 }
+
 /* 排列问题回溯算法框架 */
+
 void backtrack(vector<int>& nums) {
     for (int i = 0; i < nums.size(); i++) {
         // 剪枝逻辑
@@ -291,9 +301,11 @@ void backtrack(vector<int>& nums) {
 }
 
 # 元素可重不可复选，即 nums 中的元素可以存在重复元素，每个元素只能被使用一次，其关键在于 排序 和 剪枝， backtrack 核心代码如下：
+
 sort(nums.begin(), nums.end())；
 
 /* 组合/子集问题回溯算法框架 */
+
 void backtrack(vector<int>& nums, int start) {
     for (int i = start; i < nums.size(); i++) {
         // 剪枝逻辑，跳过值相同的相邻树枝
@@ -310,6 +322,7 @@ void backtrack(vector<int>& nums, int start) {
 }
 
 /* 排列问题回溯算法框架 */
+
 void backtrack(vector<int>& nums, vector<bool>& used) {
     for (int i = 0; i < nums.size(); i++) {
         // 剪枝逻辑
@@ -332,7 +345,9 @@ void backtrack(vector<int>& nums, vector<bool>& used) {
 }
 
 # 元素无重可复选，即 nums 中元素都是唯一的， 每个元素可以被使用若干次
+
 /* 组合/子集问题回溯算法框架 */
+
 void backtrack(vector<int>& nums, int start, deque<int>& track) {
     // 回溯算法标准框架
     for (int i = start; i < nums.size(); i++) {
@@ -344,7 +359,9 @@ void backtrack(vector<int>& nums, int start, deque<int>& track) {
         track.pop_back();
     }
 }
+
 /* 排列问题回溯算法框架 */
+
 void backtrack(vector<int>& nums, deque<int>& track) {
     for (int i = 0; i < nums.size(); i++) {
         // 做选择
