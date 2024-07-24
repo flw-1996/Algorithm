@@ -372,4 +372,36 @@ void backtrack(vector<int>& nums, deque<int>& track) {
     }
 }
 
-flw
+
+# 以球的视角理解子集问题的解法
+
+class Solution {
+private:
+
+vector<vector<int>> res; 
+vector<int> track; 
+
+public:
+
+vector<vector<int>> subsets(vector<int>& nums) {
+    backtrack(nums, 0);
+    return res;
+}
+
+// 回溯算法核心函数，遍历子集问题的回溯树
+void backtrack(vector<int>& nums, int i) {
+    if (i == nums.size())  
+    {
+        res.push_back(track);
+        return;
+    }
+    
+    // 做选择
+    track.push_back(nums[i]);
+    backtrack(nums, i + 1);
+    track.pop_back();
+    
+    // 不做选择
+    backtrack(nums, i + 1);
+}
+};
